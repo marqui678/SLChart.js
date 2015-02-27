@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="ZT" uploadOnCheckin="31cd4c1a-a623-4157-92ac-1e765cc436fe">
+    <serverData>
+      <paths name="ZT">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/htdocs/files/FitChart" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myUploadOnCheckinName" value="ZT" />
+  </component>
+</project>

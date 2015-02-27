@@ -11,6 +11,15 @@
 *
 *
 */
+var labels = [];
+var weight = [];
+var squat = [];
+var bench = [];
+var deadlift = [];
+var row = [];
+var ohp = [];
+
+var notes = [];
 
 var dataString = "http://zachtoogood.com/files/SLChart/data/spreadsheet-stronglifts.csv";
 parseData(dataString);
@@ -30,17 +39,12 @@ function parseData(dataString){
 
     function drawChart(_data){
         //Set Data
-        var labels = [];
-        var weight = [];
-        var squat = [];
-        var bench = [];
-        var deadlift = [];
-        var row = [];
-        var ohp = [];
+        
 
         for (i = 1; i < _data.data.length - 1; i++) { //i = 1 ignore header
 
             var _label = _data.data[i][0]; //Date
+            var _note = _data.data[i][1]; //Date
             var _weight = parseFloat(_data.data[i][3]); //BW
             var _squat = parseFloat(_data.data[i][5]); // Squat
 
@@ -49,10 +53,16 @@ function parseData(dataString){
             //OH Press and Deadlift
             var _ohp = parseFloat(_data.data[i][13]); 
             var _deadlift = parseFloat(_data.data[i][21]); 
+
+            var _bench = undefined;
+            var _row = undefined;
             } else {
             //Bench and Row
             var _bench = parseFloat(_data.data[i][13]); 
             var _row = parseFloat(_data.data[i][21]); 
+
+            var _ohp = undefined;
+            var _deadlift = undefined;
             }
 
             if (_weight < 10){
@@ -66,6 +76,11 @@ function parseData(dataString){
             deadlift.push(_deadlift);
             row.push(_row);
             ohp.push(_ohp);
+
+            if (_note != ""){
+                document.getElementById('notes').innerHTML += '<ul><b>' + _label + '</b> : ' + _note + '</ul>';
+            }
+            
             }
 
         //Define Chart
@@ -141,7 +156,7 @@ function parseData(dataString){
                     scaleFontSize : 13,
                     scaleFontColor : "#000000",
                     //Boolean - If we want to override with a hard coded scale
-                    scaleOverride: true,
+                    scaleOverride: false,
                     scaleSteps: 12,
                     scaleStepWidth: Math.ceil(10),
                     scaleStartValue: 0
@@ -149,6 +164,7 @@ function parseData(dataString){
 
         legend(document.getElementById("placeholder"), LineChart);
     }
+
 }
 
 

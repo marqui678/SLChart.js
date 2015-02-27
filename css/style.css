@@ -2,7 +2,8 @@
     width: 10em;
     border: 0px solid black;
     position:relative;
-    left:240px;
+    left:600px;
+    bottom:250px;
 }
 
 .legend .title {
@@ -27,4 +28,9 @@
     position:relative;
     top:20px;
     left:40px;
+}
+
+#notes {
+    position:relative;
+    bottom:140px;
 }

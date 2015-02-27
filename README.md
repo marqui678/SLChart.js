@@ -3,6 +3,7 @@ The purpose of this file is to take the URL of a StrongLifts backup file (a .csv
 <br>
 # Demo
 [Zach's SLChart](http://zachtoogood.com/files/FitChart/index.html)<br>
+<br>
 # Dependancies<br>
 ChartNew.js (https://github.com/FVANCOP/ChartNew.js/)<br>
 legend.js (https://github.com/bebraw/Chart.js.legend)<br>
@@ -12,3 +13,4 @@ papaparse.js (http://papaparse.com/)<br>
 Refactor everything into a single class<br>
 Documentation<br>
 Implement all lifts and SL addons<br>
+<br>

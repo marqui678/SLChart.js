@@ -13,4 +13,5 @@ papaparse.js (http://papaparse.com/)<br>
 Refactor everything into a single class<br>
 Documentation<br>
 Implement all lifts and SL addons<br>
+Remove legend.js so everything can be added to one div<br>
 <br>

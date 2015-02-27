@@ -1,0 +1,30 @@
+.legend {
+    width: 10em;
+    border: 0px solid black;
+    position:relative;
+    left:240px;
+}
+
+.legend .title {
+    display: block;
+    margin-bottom: 0.5em;
+    line-height: 1.2em;
+    padding: 0 0.3em;
+}
+
+.legend .color-sample {
+    display: block;
+    float: left;
+    width: 1em;
+    height: 1em;
+    border: 2px solid;
+    border-radius: 1.5em; 
+    margin-right: 0.5em;
+
+}
+
+#content {
+    position:relative;
+    top:20px;
+    left:40px;
+}

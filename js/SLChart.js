@@ -12,7 +12,7 @@
 *
 */
 
-var dataString = "http://zachtoogood.com/files/FitChart/data/spreadsheet-stronglifts.csv";
+var dataString = "http://zachtoogood.com/files/SLChart/data/spreadsheet-stronglifts.csv";
 parseData(dataString);
 
 

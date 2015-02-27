@@ -13,3 +13,4 @@ Refactor everything into a single class<br>
 Documentation<br>
 Automatically order each data set in order of size<br>
 Implement addon packs (arms etc.)<br>
+Automatic Travis CI FTP deploy<br>

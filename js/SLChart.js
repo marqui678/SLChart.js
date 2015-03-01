@@ -11,13 +11,6 @@
 *
 *
 */
-var labels = [];
-var weight = [];
-var squat = [];
-var bench = [];
-var deadlift = [];
-var row = [];
-var ohp = [];
 
 var notes = [];
 
@@ -38,6 +31,14 @@ function parseData(dataString){
 	});
 
     function drawChart(_data){
+        var labels = [];
+        var weight = [];
+        var squat = [];
+        var bench = [];
+        var deadlift = [];
+        var row = [];
+        var ohp = [];
+
         //Set Data
         document.getElementById('notes').innerHTML = '';
 

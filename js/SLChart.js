@@ -39,7 +39,7 @@ function parseData(dataString){
 
     function drawChart(_data){
         //Set Data
-        
+        document.getElementById('notes').innerHTML = '';
 
         for (i = 1; i < _data.data.length - 1; i++) { //i = 1 ignore header
 

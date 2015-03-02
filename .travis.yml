@@ -1,0 +1,6 @@
+-env:		
+-  global:		
+-    - "FTP_USER=encrypted_username"		
+-    - "FTP_PASSWORD=encrypted_password"		
+-after_failure:		
+- "curl --ftp-create-dirs -T js/SLChart.js -u $FTP_USER:$FTP_PASSWORD ftp://ftp.zachtoogood.com/files/SLChart/js"

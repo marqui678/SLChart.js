@@ -13,7 +13,7 @@
  */
 
 // Initial data hardcoded for now
-var dataString = "http://zachtoogood.com/files/SLChart/data/spreadsheet-stronglifts.csv";
+var dataString = "data/spreadsheet-stronglifts.csv";
 parseData(dataString);
 
 

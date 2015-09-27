@@ -10,5 +10,30 @@ Bootstrap included (not required), but highly recommended<br>
 ChartNew.js (https://github.com/FVANCOP/ChartNew.js/)<br>
 papaparse.js (http://papaparse.com/)<br>
 # Config<br>
-There is a configuration object inside SLChart.js, set which fields you want to show and the chart options you want. Theres also an auto-scale option if you don't want to customise the chart too much.
+There is a configuration object inside SLChart.js:
+```
+// Set config variables
+	var config = {
+		showBodyweight : true, 
+		showSquat : true,
+		showBench : true,
+		showDeadlift : true,
+		showRow : true,
+		showOhp : true,
+		chartManualScale : true,
+		chartNumSteps : 12,
+		chartStepSize : 10,
+		chartStartValue : 0
+	};
+```
 
+```
+show(item) // Show certain fields on the chart
+```
+
+```
+chartManualScale : true, // Let the chart scale itself automatically
+chartNumSteps : 12, // Number of steps on the Y-Axis
+chartStepSize : 10, // Size of each step on the Y-Axis
+chartStartValue : 0 // Start value of the Y-Axis
+```

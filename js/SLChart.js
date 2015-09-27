@@ -1,7 +1,7 @@
 /*
  * SLChart.js
  *
- * Zach Toogood February 2015
+ * Zach Toogood September 2015
  * zrtoogood@gmail.com
  * zachtoogood.com
  *
@@ -9,23 +9,36 @@
  * generate a chart using ChartNew.js (by francois.vancoppenolle@favomo.be, http:\\www.favomo.be\graphjs).
  *
  *
- *
  */
 
-// Initial data hardcoded for now
+// Initial data 
 var dataString = "data/spreadsheet-stronglifts.csv";
 parseData(dataString);
 
-
 // Parse and draw data
 function parseData(dataString){
+
+	// Set config variables
+	var config = {
+		showBodyweight : true, 
+		showSquat : true,
+		showBench : true,
+		showDeadlift : true,
+		showRow : true,
+		showOhp : true,
+		chartAutoScale : false,
+		chartNumSteps : 12,
+		chartStepSize : 10,
+		chartStartValue : 0
+	};
+
 	// Get Data
-        Papa.parse(dataString, {
+    Papa.parse(dataString, {
 		download: true,
-            dynamictyping: true,
+        dynamictyping: true,
 		complete: function(results) {
-		// Debugging - console.log(results);
-                drawChart(results);
+			// Debugging - console.log(results);
+            drawChart(results);
 		}
 	});
 
@@ -60,6 +73,7 @@ function parseData(dataString){
             var _ohp = parseFloat(_data.data[i][13]); 
             var _deadlift = parseFloat(_data.data[i][21]); 
             } else {
+			
             // Bench and Row
             var _bench = parseFloat(_data.data[i][13]); 
             var _row = parseFloat(_data.data[i][21]); 
@@ -81,14 +95,16 @@ function parseData(dataString){
             if (_note != ""){
                 document.getElementById('notes').innerHTML += '<ul><b>' + _label + '</b> : ' + _note + '</ul>';
             }
-            
         }
 
         // Define Chart
         var LineChart = {
             labels: labels,
-            datasets: 
-            [{
+            datasets: []
+        }
+		
+		if (config.showDeadlift){
+			LineChart.datasets.push({
                 label: "Deadlift (kg)",
                 fillColor: "rgba(249,249,10,0.6)",
                 strokeColor: "rgba(249,249,10,0.5)",
@@ -96,9 +112,11 @@ function parseData(dataString){
                 pointStrokeColor: "rgba(249,249,10,0.5)",
                 data: deadlift,
                 skipNullValues: true
-            },
-
-            {
+            });	
+		}
+		
+		if (config.showBodyweight){
+			LineChart.datasets.push({
                 label: "Bodyweight (kg)",
                 fillColor: "rgba(252,10,10,0.6)",
                 strokeColor: "rgba(252,10,10,0.5)",
@@ -106,9 +124,11 @@ function parseData(dataString){
                 pointStrokeColor: "rgba(252,10,10,0.5)",
                 data: weight,
                 skipNullValues: true
-            },
-
-            {
+            });	
+		}
+		
+		if (config.showSquat){
+			LineChart.datasets.push({
                 label: "Squat (kg)",
                 fillColor: "rgba(10,10,249,0.6)",
                 strokeColor: "rgba(10,10,249,0.5)",
@@ -116,9 +136,11 @@ function parseData(dataString){
                 pointStrokeColor: "rgba(10,10,249,0.5)",
                 data: squat,
                 skipNullValues: true
-            },
-
-            {
+            });	
+		}
+		
+		if (config.showBench){
+			LineChart.datasets.push({
                 label: "Bench (kg)",
                 fillColor: "rgba(10,249,10,0.6)",
                 strokeColor: "rgba(10,249,10,0.5)",
@@ -126,9 +148,12 @@ function parseData(dataString){
                 pointStrokeColor: "rgba(10,249,10,0.5)",
                 data: bench,
                 skipNullValues: true
-            },
-
-            {
+            });	
+		}
+		
+		
+		if (config.showRow){
+			LineChart.datasets.push({
                 label: "Row (kg)",
                 fillColor: "rgba(249,10,249,0.6)",
                 strokeColor: "rgba(249,10,249,0.5)",
@@ -136,9 +161,11 @@ function parseData(dataString){
                 pointStrokeColor: "rgba(249,10,249,0.5)",
                 data: row,
                 skipNullValues: true
-            },
-
-            {
+            });	
+		}
+		
+		if (config.showOhp){
+			LineChart.datasets.push({
                 label: "OH Press (kg)",
                 fillColor: "rgba(10,249,249,0.6)",
                 strokeColor: "rgba(10,249,249,0.5)",
@@ -146,22 +173,21 @@ function parseData(dataString){
                 pointStrokeColor: "rgba(10,249,249,0.5)",
                 data: ohp,
                 skipNullValues: true
-            }]
-        }
-
+            });	
+		}
+		
         // Draw Chart
         var myLineChart = new Chart(document.getElementById("canvas").getContext("2d")).Line(LineChart,
                 {
                     scaleFontSize : 13,
                     scaleFontColor : "#000000",
-                    scaleOverride: false,
-                    scaleSteps: 12,
-                    scaleStepWidth: Math.ceil(10),
-                    scaleStartValue: 0
+                    scaleOverride: config.chartAutoScale,
+                    scaleSteps: config.chartNumSteps,
+                    scaleStepWidth: Math.ceil(config.chartStepSize),
+                    scaleStartValue: config.chartStartValue
                 });
         legend(document.getElementById("placeholder"), LineChart);
     }
-
 }
 
 // From http://www.html5rocks.com/en/tutorials/file/dndfiles/ examples

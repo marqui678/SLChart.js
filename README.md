@@ -4,16 +4,11 @@ The purpose of this file is to take a StrongLifts backup file (a .csv generated 
 You will have to use style.css if you want a legend with colour indicators<br>
 Bootstrap included (not required), but highly recommended<br>
 <br>
-Bodged Auto-deployment: because this site and SLChart.js is so simple, it doesn't need compiling. There is no way to get Travis CI to not fail. However, scripts can be launched on failure, so the FTP upload can go ahead!
 # Demo
 [My SLChart](http://zachtoogood.com/files/SLChart/index.html)<br>
 # Dependancies<br>
 ChartNew.js (https://github.com/FVANCOP/ChartNew.js/)<br>
 papaparse.js (http://papaparse.com/)<br>
-#TODO<br>
-Refactor everything into a single class<br>
-Documentation<br>
-Automatically order each data set in order of size<br>
-Implement addon packs (arms etc.)<br>
-Automatic Travis CI FTP deploy<br>
-Encrypt FTP login details.<br>
+# Config<br>
+There is a configuration object inside SLChart.js, set which fields you want to show and the chart options you want. Theres also an auto-scale option if you don't want to customise the chart too much.
+

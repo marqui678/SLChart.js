@@ -26,7 +26,7 @@ function parseData(dataString){
 		showDeadlift : true,
 		showRow : true,
 		showOhp : true,
-		chartAutoScale : false,
+		chartManualScale : true,
 		chartNumSteps : 12,
 		chartStepSize : 10,
 		chartStartValue : 0
@@ -181,7 +181,7 @@ function parseData(dataString){
                 {
                     scaleFontSize : 13,
                     scaleFontColor : "#000000",
-                    scaleOverride: config.chartAutoScale,
+                    scaleOverride: config.chartManualScale,
                     scaleSteps: config.chartNumSteps,
                     scaleStepWidth: Math.ceil(config.chartStepSize),
                     scaleStartValue: config.chartStartValue

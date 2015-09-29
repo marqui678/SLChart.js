@@ -14,6 +14,7 @@ There is a configuration object inside SLChart.js:
 ```
 // Set config variables
 	var config = {
+		isMetric : true,
 		showBodyweight : true, 
 		showSquat : true,
 		showBench : true,
@@ -25,6 +26,10 @@ There is a configuration object inside SLChart.js:
 		chartStepSize : 10,
 		chartStartValue : 0
 	};
+```
+
+```
+isMetric : true, // Set to false for Imperial measurements
 ```
 
 ```

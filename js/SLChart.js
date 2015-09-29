@@ -20,16 +20,24 @@ function parseData(dataString){
 
 	// Set config variables
 	var config = {
-                isMetric : true, //Set to false for Imperial measurements
+	
+		// Set to false for Imperial measurements
+        isMetric : true,
+		imperialRatio: 2.20462262185,
+		
+		// Show/Hide various items
 		showBodyweight : true, 
 		showSquat : true,
 		showBench : true,
 		showDeadlift : true,
 		showRow : true,
 		showOhp : true,
-		chartManualScale : true,
-		chartNumSteps : 12,
-		chartStepSize : 10,
+		
+		// Chart settings
+		//Auto set scale
+		chartManualScale : false, 
+		chartNumSteps : 12, 
+		chartStepSize : 10, 
 		chartStartValue : 0
 	};
 
@@ -55,18 +63,19 @@ function parseData(dataString){
         // Set Data
         document.getElementById('notes').innerHTML = '';
 
-        for (i = 1; i < _data.data.length - 1; i++) { //i = 1 ignore header
+		//i = 1 ignore header
+        for (i = 1; i < _data.data.length - 1; i++) { 
 
-            var _label = _data.data[i][0]; //Date
-            var _note = _data.data[i][1]; //Date
-            var _weight = parseFloat(_data.data[i][3]); //BW (if App is set to lbs, csv values are in lbs)
-            if (config.isMetric === true) {
-                var _squat = parseFloat(_data.data[i][5]); // Squat
-            }
-            else
-            {
-                var _squat = parseFloat(_data.data[i][5]*2.20462262185);
-            }            
+			//Date
+            var _label = _data.data[i][0]; 
+			//Date
+            var _note = _data.data[i][1];
+			
+			// BW (if App is set to lbs, csv values are in lbs)
+            var _weight = parseFloat(_data.data[i][3]); 
+			
+			var _squat = parseFloat(_data.data[i][5]) * (config.isMetric ? 1.0 : config.imperialRatio)
+			           
             // Alternating, set as null then populate
             var _bench = undefined;
             var _row = undefined;
@@ -75,31 +84,18 @@ function parseData(dataString){
 
             if (i%2 == 0)
             {
-		// OH Press and Deadlift
-		if (config.isMetric === true) {
-		    var _ohp = parseFloat(_data.data[i][13]); 
-                    var _deadlift = parseFloat(_data.data[i][21]);
-      	        }
-	        else
-	        {
-		    var _ohp = parseFloat(_data.data[i][13]*2.20462262185);
-                    var _deadlift = parseFloat(_data.data[i][21]*2.20462262185);
-	        }
-            } else {		
-		// Bench and Row
-		if (config.isMetric === true) {
-		    var _bench = parseFloat(_data.data[i][13]); 
-                    var _row = parseFloat(_data.data[i][21]); 
-		}
-		else
-		{
-                    var _bench = parseFloat(_data.data[i][13]*2.20462262185);
-                    var _row = parseFloat(_data.data[i][21]*2.20462262185);
-		}
-
+				// OH Press and Deadlift
+				var _ohp = parseFloat(_data.data[i][13]) * (config.isMetric ? 1.0 : config.imperialRatio); 
+				var _deadlift = parseFloat(_data.data[i][21]) * (config.isMetric ? 1.0 : config.imperialRatio);
+            } 
+			else {		
+				// Bench and Row
+                var _bench = parseFloat(_data.data[i][13]) * (config.isMetric ? 1.0 : config.imperialRatio);
+				var _row = parseFloat(_data.data[i][21]) * (config.isMetric ? 1.0 : config.imperialRatio); 
             }
 
-            if (_weight < 10){
+            if (_weight < 10)
+			{
                 _weight = undefined;
             }
 
@@ -111,20 +107,17 @@ function parseData(dataString){
             row.push(_row);
             ohp.push(_ohp);
 		
-	    // Populate notes
+			// Populate notes
             if (_note != ""){
                 document.getElementById('notes').innerHTML += '<ul><b>' + _label + '</b> : ' + _note + '</ul>';
             }
         }
 
         // Select Units
-	if (config.isMetric === true) {
-		var units = "kg";
-	} else {
-		var units = "lbs";
-	}
+		var units = config.isMetric ? "kg" : "lbs"; 
 
-	// Define Chart
+
+		// Define Chart
         var LineChart = {
             labels: labels,
             datasets: []

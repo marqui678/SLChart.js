@@ -10,35 +10,30 @@ Bootstrap included (not required), but highly recommended<br>
 ChartNew.js (https://github.com/FVANCOP/ChartNew.js/)<br>
 papaparse.js (http://papaparse.com/)<br>
 # Config<br>
-There is a configuration object inside SLChart.js:
+There is a configuration object inside SLChart.js, annotated with instructions:
 ```
 // Set config variables
+	// Set config variables
 	var config = {
-		isMetric : true,
+	
+		// Set to false for Imperial measurements
+        isMetric : false,
+		imperialRatio: 2.20462262185,
+		
+		// Show/Hide various items
 		showBodyweight : true, 
 		showSquat : true,
 		showBench : true,
 		showDeadlift : true,
 		showRow : true,
 		showOhp : true,
-		chartManualScale : true,
-		chartNumSteps : 12,
-		chartStepSize : 10,
+		
+		// Chart settings
+		//Auto set scale
+		chartManualScale : false, 
+		chartNumSteps : 12, 
+		chartStepSize : 10, 
 		chartStartValue : 0
 	};
 ```
 
-```
-isMetric : true, // Set to false for Imperial measurements
-```
-
-```
-show(item) // Show certain fields on the chart
-```
-
-```
-chartManualScale : true, // Let the chart scale itself automatically
-chartNumSteps : 12, // Number of steps on the Y-Axis
-chartStepSize : 10, // Size of each step on the Y-Axis
-chartStartValue : 0 // Start value of the Y-Axis
-```

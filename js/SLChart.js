@@ -20,6 +20,7 @@ function parseData(dataString){
 
 	// Set config variables
 	var config = {
+                isMetric : true, //Set to false for Imperial measurements
 		showBodyweight : true, 
 		showSquat : true,
 		showBench : true,
@@ -58,9 +59,14 @@ function parseData(dataString){
 
             var _label = _data.data[i][0]; //Date
             var _note = _data.data[i][1]; //Date
-            var _weight = parseFloat(_data.data[i][3]); //BW
-            var _squat = parseFloat(_data.data[i][5]); // Squat
-            
+            var _weight = parseFloat(_data.data[i][3]); //BW (if App is set to lbs, csv values are in lbs)
+            if (config.isMetric === true) {
+                var _squat = parseFloat(_data.data[i][5]); // Squat
+            }
+            else
+            {
+                var _squat = parseFloat(_data.data[i][5]*2.20462262185);
+            }            
             // Alternating, set as null then populate
             var _bench = undefined;
             var _row = undefined;
@@ -69,14 +75,28 @@ function parseData(dataString){
 
             if (i%2 == 0)
             {
-            // OH Press and Deadlift
-            var _ohp = parseFloat(_data.data[i][13]); 
-            var _deadlift = parseFloat(_data.data[i][21]); 
-            } else {
-			
-            // Bench and Row
-            var _bench = parseFloat(_data.data[i][13]); 
-            var _row = parseFloat(_data.data[i][21]); 
+		// OH Press and Deadlift
+		if (config.isMetric === true) {
+		    var _ohp = parseFloat(_data.data[i][13]); 
+                    var _deadlift = parseFloat(_data.data[i][21]);
+      	        }
+	        else
+	        {
+		    var _ohp = parseFloat(_data.data[i][13]*2.20462262185);
+                    var _deadlift = parseFloat(_data.data[i][21]*2.20462262185);
+	        }
+            } else {		
+		// Bench and Row
+		if (config.isMetric === true) {
+		    var _bench = parseFloat(_data.data[i][13]); 
+                    var _row = parseFloat(_data.data[i][21]); 
+		}
+		else
+		{
+                    var _bench = parseFloat(_data.data[i][13]*2.20462262185);
+                    var _row = parseFloat(_data.data[i][21]*2.20462262185);
+		}
+
             }
 
             if (_weight < 10){
@@ -97,7 +117,14 @@ function parseData(dataString){
             }
         }
 
-        // Define Chart
+        // Select Units
+	if (config.isMetric === true) {
+		var units = "kg";
+	} else {
+		var units = "lbs";
+	}
+
+	// Define Chart
         var LineChart = {
             labels: labels,
             datasets: []
@@ -105,7 +132,7 @@ function parseData(dataString){
 		
 		if (config.showDeadlift){
 			LineChart.datasets.push({
-                label: "Deadlift (kg)",
+                label: "Deadlift ("+units+")",
                 fillColor: "rgba(249,249,10,0.6)",
                 strokeColor: "rgba(249,249,10,0.5)",
                 pointColor: "rgba(249,249,10,0.5)",
@@ -117,7 +144,7 @@ function parseData(dataString){
 		
 		if (config.showBodyweight){
 			LineChart.datasets.push({
-                label: "Bodyweight (kg)",
+                label: "Bodyweight ("+units+")",
                 fillColor: "rgba(252,10,10,0.6)",
                 strokeColor: "rgba(252,10,10,0.5)",
                 pointColor: "rgba(252,10,10,0.5)",
@@ -129,7 +156,7 @@ function parseData(dataString){
 		
 		if (config.showSquat){
 			LineChart.datasets.push({
-                label: "Squat (kg)",
+                label: "Squat ("+units+")",
                 fillColor: "rgba(10,10,249,0.6)",
                 strokeColor: "rgba(10,10,249,0.5)",
                 pointColor: "rgba(10,10,249,0.5)",
@@ -141,7 +168,7 @@ function parseData(dataString){
 		
 		if (config.showBench){
 			LineChart.datasets.push({
-                label: "Bench (kg)",
+                label: "Bench ("+units+")",
                 fillColor: "rgba(10,249,10,0.6)",
                 strokeColor: "rgba(10,249,10,0.5)",
                 pointColor: "rgba(10,249,10,0.5)",
@@ -154,7 +181,7 @@ function parseData(dataString){
 		
 		if (config.showRow){
 			LineChart.datasets.push({
-                label: "Row (kg)",
+                label: "Row ("+units+")",
                 fillColor: "rgba(249,10,249,0.6)",
                 strokeColor: "rgba(249,10,249,0.5)",
                 pointColor: "rgba(249,10,249,0.5)",
@@ -166,7 +193,7 @@ function parseData(dataString){
 		
 		if (config.showOhp){
 			LineChart.datasets.push({
-                label: "OH Press (kg)",
+                label: "OH Press ("+units+")",
                 fillColor: "rgba(10,249,249,0.6)",
                 strokeColor: "rgba(10,249,249,0.5)",
                 pointColor: "rgba(10,249,249,0.5)",

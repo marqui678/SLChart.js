@@ -6,7 +6,7 @@ Bootstrap included (not required), but highly recommended<br>
 # Demo
 [My SLChart](http://zachtoogood.com/files/SLChart/index.html)
 # Dependancies<br>
-ChartNew.js (https://github.com/FVANCOP/ChartNew.js/)
+ChartNew.js (https://github.com/FVANCOP/ChartNew.js/)<br/>
 papaparse.js (http://papaparse.com/)
 # Config<br>
 There is a configuration object inside SLChart.js, annotated with instructions:

@@ -29,7 +29,7 @@ There is a configuration object inside SLChart.js:
 ```
 
 ```
-isMetric // Set to false for Imperial measurements
+isMetric : true, // Set to false for Imperial measurements
 ```
 
 ```

@@ -35,10 +35,10 @@ function parseData(dataString){
 		
 		// Chart settings
 		//Auto set scale
-		chartManualScale : false, 
-		chartNumSteps : 12, 
+		chartManualScale : true, 
+		chartNumSteps : 15, 
 		chartStepSize : 10, 
-		chartStartValue : 0
+		chartStartValue : 20
 	};
 
 	// Get Data
@@ -74,7 +74,7 @@ function parseData(dataString){
 			// BW (if App is set to lbs, csv values are in lbs)
             var _weight = parseFloat(_data.data[i][3]); 
 			
-			var _squat = parseFloat(_data.data[i][5]) * (config.isMetric ? 1.0 : config.imperialRatio)
+			var _squat = parseFloat(_data.data[i][6]) * (config.isMetric ? 1.0 : config.imperialRatio)
 			           
             // Alternating, set as null then populate
             var _bench = undefined;
@@ -85,13 +85,13 @@ function parseData(dataString){
             if (i%2 == 0)
             {
 				// OH Press and Deadlift
-				var _ohp = parseFloat(_data.data[i][13]) * (config.isMetric ? 1.0 : config.imperialRatio); 
-				var _deadlift = parseFloat(_data.data[i][21]) * (config.isMetric ? 1.0 : config.imperialRatio);
+				var _ohp = parseFloat(_data.data[i][14]) * (config.isMetric ? 1.0 : config.imperialRatio); 
+				var _deadlift = parseFloat(_data.data[i][22]) * (config.isMetric ? 1.0 : config.imperialRatio);
             } 
 			else {		
 				// Bench and Row
-                var _bench = parseFloat(_data.data[i][13]) * (config.isMetric ? 1.0 : config.imperialRatio);
-				var _row = parseFloat(_data.data[i][21]) * (config.isMetric ? 1.0 : config.imperialRatio); 
+                var _bench = parseFloat(_data.data[i][14]) * (config.isMetric ? 1.0 : config.imperialRatio);
+				var _row = parseFloat(_data.data[i][22]) * (config.isMetric ? 1.0 : config.imperialRatio); 
             }
 
             if (_weight < 10)
@@ -196,16 +196,20 @@ function parseData(dataString){
             });	
 		}
 		
-        // Draw Chart
-        var myLineChart = new Chart(document.getElementById("canvas").getContext("2d")).Line(LineChart,
-                {
-                    scaleFontSize : 13,
+		// Chart Options
+		var options = {
+                    scaleFontSize : 15,
                     scaleFontColor : "#000000",
                     scaleOverride: config.chartManualScale,
                     scaleSteps: config.chartNumSteps,
                     scaleStepWidth: Math.ceil(config.chartStepSize),
-                    scaleStartValue: config.chartStartValue
-                });
+                    scaleStartValue: config.chartStartValue,
+					showXLabels: 5
+					
+		};
+                
+        // Draw Chart
+        var myLineChart = new Chart(document.getElementById("canvas").getContext("2d")).Line(LineChart, options);
         legend(document.getElementById("placeholder"), LineChart);
     }
 }
